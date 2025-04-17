@@ -1,0 +1,8 @@
+[package]
+name = "sandbox_rust"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+colored = "3.0.0"
+log_macro = { path = "crates/log_macro" }
