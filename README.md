@@ -1,110 +1,87 @@
-# Spacecommands
+# Rust Sandbox
+
+This repository is your playground for experimenting with advanced Rust concepts. It is designed as a sandbox environment where I can safely explore new ideas, test code, and sharpen your Rust skills.
 
 ## Overview
 
-**Spacecommands** is a lightweight CLI framework that provides common utility commands and a base Docker setup for any project. It requires no external dependencies (except Docker, which is optional). 
+Inside this repository you'll find a collection of experiments and learning projects in Rust. It serves as a personal laboratory to dive deep into the language while experimenting with different patterns, libraries, and programming paradigms.
 
-This project is designed for Unix-based systems. Some scripts may not work on Windows without modifications.
+This repository uses Rust’s built-in [examples](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#examples) system to organize small, self-contained programs focused on specific concepts like smart pointers, ownership, concurrency, and more.
 
-## Features
+### Docker-Based Commands
 
-- Easy-to-use CLI for common operations
-- Predefined Docker commands for managing containers
-- Automatic execution of commands inside the appropriate container
-- Autocompletion support with `source ./commands`
+To streamline the development process, several handy commands are available. These commands are built on top of Docker, ensuring that you always work with a fully installed and configured Rust environment.
 
-## Directory Structure (Simplified)
+### Starting the Development Environment
 
-```
-.
-├── commands
-│   ├── app
-│   │   ├── container
-│   │   │   ├── build.sh
-│   │   │   ├── logs-tail.sh
-│   │   │   ├── ...
-│   ├── docker
-│   │   ├── clean.sh
-│   │   ├── ls.sh
-│   │   ├── ...
-│   ├── fc
-│   │   ├── app
-│   │   │   ├── migrate
-│   │   │   │   ├── generate-migrate.sh
-│   │   │   │   ├── up-all.sh
-│   │   │   │   ├── ...
-│   │   │   ├── tests
-│   │   │   │   ├── e2e.sh
-│   │   │   │   ├── unit.sh
-│   │   │   │   ├── ...
-│   │   │   ├── ...
-├── commands.sh
-├── docker
-│   ├── app
-│   │   ├── compose.yml
-│   │   ├── Dockerfile
-│   │   ├── ...
-│   ├── db
-│   │   ├── compose.yml
-│   │   ├── ...
-├── README.md
+To launch a Docker container with the complete Rust environment, run:
+
+`./commands.sh app/container/build`
+
+This command will build and start a container configured with all necessary Rust tooling.
+
+### Accessing the Container Shell
+
+Once your container is up and running, you can enter the container to execute commands inside the environment with:
+
+`./commands.sh app/container/shell`
+
+This allows you to work interactively inside the container, ensuring consistency and isolation from your host system.
+
+You can also connect to the running container with the plugin [remote explorer](https://marketplace.visualstudio.com/items/?itemName=ms-vscode-remote.remote-containers).
+
+## Getting Started
+
+0. Clone the repository
+
+```bash
+git clone <repository_url>
+cd <repository_directory>
 ```
 
-## Running Commands
+1. Start the container
 
-All commands are executed from the host machine using `./commands.sh`. However, commands inside `commands/fc` (fc = "from container") are executed from inside a container. The `commands.sh` script automatically ensures that:
+Run the following command to build the rust container :
 
-- Regular commands are executed on the host.
-- Commands inside `commands/fc` are executed within the **app** container (currently, the script does not support other containers).
-- If you run `./commands.sh fc/...` from the host, it will be redirected inside the container.
+`./commands.sh app/container/build.sh`
 
-## Autocompletion
+(tips: you would like have autocompletion when you run `commands.sh <autocomplete plz with tab>` ? exec `source ./commands.sh` before !)
 
-To enable autocompletion when using `./commands.sh`, run:
+2. Access the interactive shell
 
-```sh
-source ./commands
-```
+Once the container is running, enter it via:
 
-Now, pressing `[Tab]` after `./commands.sh` will suggest available commands.
+`./commands.sh app/container/shell`
 
-## How to Integrate Spacecommands into Your Project
+3. Start experimenting
 
-If you want to bring **Spacecommands** into your existing project **without overwriting your .git or existing files**, follow these steps:
+Now that you’re inside the container, you can compile your Rust projects, run tests, and try out advanced Rust patterns with all required tooling at your disposal.
 
-### 1. Add Spacecommands as a remote
+### Running Examples
 
-```sh
-git remote add spacecommands git@github.com:spacecodeur/spacecommands.git
-```
+This project makes use of Cargo's example system (examples/ directory) to demonstrate specific Rust concepts in isolation.
 
-### 2. Fetch the latest Spacecommands changes
+To run a specific example, use the following command pattern:
 
-```sh
-git fetch spacecommands
-```
+`./commands.sh fc/app/examples/run <example_name>`
 
-### 3. Merge Spacecommands into your project (while keeping your files safe)
+For instance, if you want to run the smartpointers examples, execute:
 
-```sh
-git merge --allow-unrelated-histories spacecommands/main -X ours
-```
+`./commands.sh fc/app/examples/run smartpointers`
 
-This will:
-- **Add new files from Spacecommands** without overwriting existing files in your project.
-- **Preserve your own files and modifications**.
-- **Allow you to review changes** before committing.
+`fc` stands for `from container`, that means commands begin by `fc` can be run from the host machine or the container.
 
-If conflicts appear (e.g., in `.env`), Git will prompt you to manually merge them.
+These examples are designed to be small, focused, and easy to extend. Feel free to explore them or add your own under the `examples/` folder.
 
-Finally, set the name of your project in the key `APP_NAME` (`.env` file)
+### Running Tests
 
-### 4. Commit the merge
+- unit tests : `./commads.sh fc/app/examples/tests/unit`
+- unit tests with code coverage : `fc/app/examples/tests/unit-cov`
 
-Once resolved, finalize the integration:
+## Contributing
 
-```sh
-git commit -am "Merged Spacecommands into project"
-```
+Feel free to fork this repository and suggest improvements or share your experiments by creating a pull request. This sandbox is meant to evolve as you explore new Rust features and techniques.
 
-Now, **Spacecommands** is integrated into your project while keeping your Git history intact!
+### License
+
+This project is open source and available under the MIT License.
