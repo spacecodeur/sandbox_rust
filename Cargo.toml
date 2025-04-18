@@ -5,4 +5,4 @@ edition = "2024"
 
 [dependencies]
 colored = "3.0.0"
-log_macro = { path = "crates/log_macro" }
+goal_macro = { path = "crates/goal_macro" }

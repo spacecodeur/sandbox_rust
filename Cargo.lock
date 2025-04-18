@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "log_macro"
+name = "goal_macro"
 version = "0.1.0"
 dependencies = [
  "quote",
@@ -42,7 +42,7 @@ name = "sandbox_rust"
 version = "0.1.0"
 dependencies = [
  "colored",
- "log_macro",
+ "goal_macro",
 ]
 
 [[package]]

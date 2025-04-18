@@ -1,6 +1,6 @@
-use log_macro::log;
+// use goal_macro::goal;
 
-#[log("une fonction pour tester le bon fonctionnement du repo")]
+// #[goal("Do you like helloworld ? here a helloworld !")]
 fn main() -> Result<(), String> {
     let message = get_hello_world();
     println!("{}", message);
