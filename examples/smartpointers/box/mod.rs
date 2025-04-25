@@ -1,2 +1,2 @@
-pub mod advanced;
+pub mod advanceds;
 pub mod basics;

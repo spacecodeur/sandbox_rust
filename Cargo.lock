@@ -12,7 +12,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "goal_macro"
+name = "declarative_macros"
 version = "0.1.0"
 dependencies = [
  "quote",
@@ -20,12 +20,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "goal_log"
+version = "0.1.0"
+dependencies = [
+ "colored",
+ "declarative_macros",
+ "procedural_macros",
+]
+
+[[package]]
 name = "proc-macro2"
-version = "1.0.94"
+version = "1.0.95"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a31971752e70b8b2686d7e46ec17fb38dad4051d94024c88df49b667caea9c84"
+checksum = "02b3e5e68a3a1a02aad3ec490a98007cbc13c37cbe84a3cd7b8e406d76e7f778"
 dependencies = [
  "unicode-ident",
+]
+
+[[package]]
+name = "procedural_macros"
+version = "0.1.0"
+dependencies = [
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -41,8 +58,7 @@ dependencies = [
 name = "sandbox_rust"
 version = "0.1.0"
 dependencies = [
- "colored",
- "goal_macro",
+ "goal_log",
 ]
 
 [[package]]

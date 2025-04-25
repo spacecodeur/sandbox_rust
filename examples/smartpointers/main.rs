@@ -1,32 +1,40 @@
 mod r#box;
-use r#box::*;
-use goal_macro::goal;
-
-// use goal_macro::goal;
+mod rc;
+mod refcell;
+mod interplay;
+use goal_log::goals;
 
 fn main() {
-    // basics
+    goals! {
+        r#box::basics::stack_to_heap =>                    "understand the basic use of Box to allocate a value on the heap",
+        r#box::basics::increment_boxed_u8_value =>         "manipulate and modify a value stored inside a Box",
+        r#box::basics::consommer_box =>                    "understand ownership implications when passing a Box",
+        r#box::basics::increment_double_boxed_u8_value =>  "manipulate and modify a value stored inside a Box<Box>",
+    }
 
-    #[goal("understand the basic use of Box to allocate a value on the heap")]
-    basics::stack_to_heap();
+    goals! {
+        r#box::advanceds::box_trait_objects => "use Box to store different types implementing the same trait in a collection"
+    }
 
-    basics::increment_boxed_u8_value();
-    basics::consommer_box();
+    goals! {
+        rc::basics::basic_rc_usage =>       "create and clone an Rc to share ownership of data",
+        rc::basics::reference_count =>      "check how Rc reference counting works as you clone and drop values",
+        rc::basics::rc_in_structs =>        "store Rc values in a struct and share them across instances",
+        rc::basics::rc_in_collections =>    "Store multiple Rc values in a vector and track shared data"
+    }
 
-    let mut x_from_heap_from_another_heap = Box::new(Box::new(23));
-    dbg!(&x_from_heap_from_another_heap);
-    x_from_heap_from_another_heap =
-        basics::increment_double_boxed_u8_value(x_from_heap_from_another_heap).unwrap();
-    dbg!(&x_from_heap_from_another_heap);
+    goals!{
+        rc::advanceds::dag_with_rc => "Model a Directed Acyclic Graph (DAG) using Rc to demonstrate shared ownership"
+    }
 
-    // advanced
+    goals!{
+        refcell::basics::basic_refcell_usage =>                         "Understand the basic usage of RefCell for interior mutability",
+        refcell::basics::refcell_exclusive_borrowing_runtime_check =>   "Learn the runtime checks of RefCell for borrow rules",
+        refcell::basics::refcell_inside_struct =>                       "Use RefCell inside a struct to allow internal mutability on fields",
+        refcell::basics::refcell_error_handling =>                      "Handle RefCell borrow errors gracefully instead of panicking"
+    }
 
-    let circle1 = advanced::Circle { radius: 10 };
-    let square1 = advanced::Square {
-        width: 5,
-        heigth: 7,
-    };
-
-    let figures: Vec<Box<dyn advanced::Figure>> = vec![Box::new(circle1), Box::new(square1)];
-    advanced::show_perimeters(figures);
+    goals!{
+        refcell::advanceds::refcell_with_pattern => "Apply RefCell in a common mutation pattern: caching a computed value"
+    }
 }

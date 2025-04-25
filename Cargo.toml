@@ -4,5 +4,4 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-colored = "3.0.0"
-goal_macro = { path = "crates/goal_macro" }
+goal_log = { path = "crates/goal_log" }

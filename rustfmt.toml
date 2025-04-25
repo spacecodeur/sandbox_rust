@@ -1,0 +1,4 @@
+# Prevents rustfmt from reformatting attribute-like macros such as #[description("...")] and #[tip("...")]
+# This is especially useful when using external procedural macros that define their own attribute syntax.
+# Without this, rustfmt may split long attributes across multiple lines, which can hurt readability.
+normalize_doc_attributes = 150

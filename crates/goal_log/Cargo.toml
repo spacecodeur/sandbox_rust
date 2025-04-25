@@ -1,0 +1,9 @@
+[package]
+name = "goal_log"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+colored = "3.0.0"
+declarative_macros = { path = "./crates/declarative_macros" }
+procedural_macros = { path = "./crates/procedural_macros" }
