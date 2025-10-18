@@ -37,4 +37,19 @@ fn main() {
     goals!{
         refcell::advanceds::refcell_with_pattern => "Apply RefCell in a common mutation pattern: caching a computed value"
     }
+    
+    goals!{
+        interplay::rc_refcell::basics::basic_shared_mutability =>    "Create a value that can be mutated across shared Rc references",
+        interplay::rc_refcell::basics::vector_of_shared_counters =>  "Create a vector of shared mutable counters using Rc<RefCell<i32>>",
+        interplay::rc_refcell::basics::shared_owner_struct => "Combine Rc and RefCell inside a struct for shared state across instances",
+        interplay::rc_refcell::basics::linked_list_mutation => "Build a simple singly linked list with shared mutable nodes",
+        interplay::rc_refcell::basics::linked_list_example =>        "Build an another simple linked list with shared, mutable nodes using Rc<RefCell>",
+        interplay::rc_refcell::basics::collection_of_shared_values =>"Store Rc<RefCell> values in a collection for shared mutability"
+    }
+    
+    goals!{
+        interplay::rc_refcell::advanceds::tree_structure_with_mutation => "Create a tree-like structure where nodes share mutable children",
+        interplay::rc_refcell::advanceds::cyclic_graph =>       "Model a cyclic graph structure with Rc<RefCell>",
+        interplay::rc_refcell::advanceds::observer_pattern =>   "Implement the Observer pattern using Rc<RefCell> for shared state"
+    }
 }
